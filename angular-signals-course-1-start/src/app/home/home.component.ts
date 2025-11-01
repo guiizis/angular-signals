@@ -19,5 +19,10 @@ import {toObservable, toSignal, outputToObservable, outputFromObservable} from "
     styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  counter = signal(0);
+
+  incrementCounter() {
+    this.counter.update(c => c + 1);
+  }
 
 }
