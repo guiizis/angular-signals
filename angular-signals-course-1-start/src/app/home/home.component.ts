@@ -23,7 +23,12 @@ type Counter = {
     styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  counter= signal<Counter>({count:0 });
+  counter = signal<Counter>({count:0 });
+  values = signal<number[]>([1,2,3]);
+
+  append(): void {
+    this.values.update(vs => [...vs, vs.length + 1])
+  }
 
   incrementCounter() {
     this.counter.update(c => ({
