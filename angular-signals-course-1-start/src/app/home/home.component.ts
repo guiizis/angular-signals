@@ -22,38 +22,4 @@ type Counter = {
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit {
-  counter = signal<Counter>({ count: 0 });
-  values = signal<number[]>([1, 2, 3]);
-  injector = inject(Injector);
-
-  tenXCounter = computed(() => {
-    const current = this.counter();
-    return current.count * 10;
-  });
-
-  hundredXCounter = computed(() => {
-    const current = this.tenXCounter();
-    return current * 100;
-  });
-
-  ngOnInit(): void {
-    effect(() => {
-      console.log('Counter changed:', this.counter());
-    }, {
-      injector: this.injector
-    });
-  }
-
-  append(): void {
-    this.values.update(vs => [...vs, vs.length + 1])
-  }
-
-  incrementCounter() {
-    this.counter.update(c => ({
-      ...c,
-      count: c.count + 1
-    }));
-  }
-
-}
+export class HomeComponent {}
