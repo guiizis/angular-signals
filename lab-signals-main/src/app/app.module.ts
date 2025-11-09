@@ -4,11 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignalsIntroComponent } from './signals-intro/signals-intro.component';
+import { EffectComponent } from './effect/effect.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignalsIntroComponent
+    SignalsIntroComponent,
+    EffectComponent
   ],
   imports: [
     BrowserModule,
