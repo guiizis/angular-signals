@@ -1,1 +1,19 @@
-<p>effect works!</p>
+[<h2>Simulação de Estado Físico</h2>
+<ul>
+  <li *ngFor="let element of elements" (click)="selecionarElement(element)">
+    {{ element.name }} ({{ element.symbol }})
+  </li>
+</ul>
+
+<div *ngIf="selectedElement()" class="selection">
+  <div class="elements">
+    <p>Element Selecionado: {{ selectedElement()?.name }}</p>
+  </div>
+  <div class="temperature">
+    <p>Temperatura Atual: {{ temperature() }}°C</p>
+    <button (click)="ajustarTemperatura(temperature() + 10)">Aumentar Temperatura</button>
+    <button (click)="ajustarTemperatura(temperature() - 10)">Diminuir Temperatura</button>
+  </div>
+  <p>Estado Físico: {{ physicalState() }}</p>
+</div>
+]

@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 
 interface Element {
   name: string;
@@ -26,4 +26,24 @@ export class EffectComponent {
     { name: 'Boron', symbol: 'B', massNumber: 11, fusionPoint: 2076, boilingPoint: 3927 },
     { name: 'Carbon', symbol: 'C', massNumber: 12, fusionPoint: 3550, boilingPoint: 4827 },
   ];
+
+  constructor() {
+    effect(() => {
+      const element = this.selectedElement();
+      const temp = this.temperature();
+
+      if (element) {
+        let physicalState: string;
+
+        if (temp <= element.fusionPoint) {
+          physicalState = 'Sólido';
+        } else if (temp > element.fusionPoint && temp < element.boilingPoint) {
+          physicalState = 'Líquido';
+        } else {
+          physicalState = 'Gasoso';
+        }
+        this.physicalState.set(physicalState);
+      }
+    }, {allowSignalWrites: true});
+  }
 }
