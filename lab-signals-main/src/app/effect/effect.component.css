@@ -1,0 +1,88 @@
+:host {
+  text-align: center;
+  color: #e8e8e4;
+}
+
+h2 {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+li {
+  padding: 10px 15px;
+  border: 1px solid #e8e8e4;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+li:hover {
+  border-color: var(--primary-color);
+}
+
+li:active {
+  transform: scale(0.95);
+}
+
+p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.selection {
+  margin: 30px;
+}
+
+.elements {
+  margin: 30px;
+  gap: 30px;
+}
+
+.temperature {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.detalhe_elemento p {
+  border: 1px solid #e8e8e4;
+  padding: 10px;
+  width: 220px;
+  height: auto;
+  font-size: 1rem;
+  margin: 0 auto;
+}
+
+button {
+  width: 120px;
+  height: 52px;
+  padding: 8px 16px;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid white;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+button:active {
+  transform: scale(0.95);
+}

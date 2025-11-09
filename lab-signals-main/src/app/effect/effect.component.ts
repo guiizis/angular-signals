@@ -46,4 +46,12 @@ export class EffectComponent {
       }
     }, {allowSignalWrites: true});
   }
+
+  selectElement(element: Element): void {
+    this.selectedElement.set(element);
+  }
+
+  adjustTemperature(newTemperature: number): void {
+    this.temperature.set(newTemperature);
+  }
 }
