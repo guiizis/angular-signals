@@ -1,0 +1,27 @@
+nav {
+  padding: 10px;
+  text-align: center;
+  font-weight: 300px;
+}
+
+ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+}
+
+li {
+  display: inline;
+}
+
+a {
+  text-decoration: none;
+  color: #e8e8e4;
+}
+
+a:hover {
+  color: #c7b42c; 
+}
