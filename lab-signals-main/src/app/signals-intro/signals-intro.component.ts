@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 
 interface Element {
   name: string;
@@ -13,6 +13,12 @@ interface Element {
 })
 export class SignalsIntroComponent {
   selectedElement = signal<Element | null>(null);
+  elementInfo = computed(() => {
+    const selectedElement = this.selectedElement();
+    return selectedElement
+      ? `Você selecionou ${selectedElement.name} (${selectedElement.symbol}) com número de massa ${selectedElement.massNumber}.`
+      : 'Nenhum elemento selecionado.';
+  })
 
   elements: Element[] = [
     { name: 'Hydrogen', symbol: 'H', massNumber: 1 },
