@@ -1,10 +1,5 @@
-import { Component, computed, signal } from '@angular/core';
-
-interface Element {
-  name: string;
-  symbol: string;
-  massNumber: number;
-}
+import { Component, inject } from '@angular/core';
+import { ElementService } from '../element.service';
 
 @Component({
   selector: 'app-signals-intro',
@@ -12,28 +7,5 @@ interface Element {
   styleUrls: ['./signals-intro.component.css']
 })
 export class SignalsIntroComponent {
-  selectedElement = signal<Element | null>(null);
-  elementInfo = computed(() => {
-    const selectedElement = this.selectedElement();
-    return selectedElement
-      ? `Você selecionou ${selectedElement.name} (${selectedElement.symbol}) com número de massa ${selectedElement.massNumber}.`
-      : 'Nenhum elemento selecionado.';
-  })
-
-  elements: Element[] = [
-    { name: 'Hydrogen', symbol: 'H', massNumber: 1 },
-    { name: 'Helium', symbol: 'He', massNumber: 4 },
-    { name: 'Lithium', symbol: 'Li', massNumber: 7 },
-    { name: 'Beryllium', symbol: 'Be', massNumber: 9 },
-    { name: 'Boron', symbol: 'B', massNumber: 11 },
-    { name: 'Carbon', symbol: 'C', massNumber: 12 },
-    { name: 'Nitrogen', symbol: 'N', massNumber: 14 },
-    { name: 'Oxygen', symbol: 'O', massNumber: 16 },
-    { name: 'Fluorine', symbol: 'F', massNumber: 19 },
-    { name: 'Neon', symbol: 'Ne', massNumber: 20 }
-  ];
-
-  selectElement(element: Element): void {
-    this.selectedElement.set(element);
-  }
+  service: ElementService = inject(ElementService);
 }
