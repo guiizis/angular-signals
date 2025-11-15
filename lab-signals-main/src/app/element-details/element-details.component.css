@@ -10,12 +10,16 @@ h2 {
   font-weight: 600;
 }
 
+h3 {
+  color: var(--primary-color);
+  text-align: justify;
+}
+
 ul {
   list-style: none;
   padding: 0;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 10px;
 }
 
@@ -23,24 +27,11 @@ li {
   padding: 10px 15px;
   border: 1px solid #e8e8e4;
   border-radius: 12px;
-  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-li:hover {
-  border: 1px solid var(--primary-color);
-}
 
-li:active {
-  transform: scale(0.95);
-}
-
-button {
-  border: none;
-  color: white;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  background: transparent;
-  font-size: 16px;
+p {
+  font-size: 1.2rem;
+  margin: 10px 0;
 }

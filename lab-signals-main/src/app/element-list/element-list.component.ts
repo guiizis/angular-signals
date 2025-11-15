@@ -3,13 +3,11 @@ import { Element, ElementService } from '../element.service';
 
 @Component({
   selector: 'app-element-list',
-  standalone: true,
-  imports: [],
   templateUrl: './element-list.component.html',
   styleUrl: './element-list.component.css'
 })
 export class ElementListComponent {
-  private elementService = inject(ElementService);
+  elementService = inject(ElementService);
 
   selectElement(element: Element): void {
     this.elementService.selectElement(element);
