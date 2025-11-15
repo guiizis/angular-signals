@@ -15,6 +15,7 @@ export class ElementService {
   selectedElement = signal<Element | null>(null);
   temperature = signal<number>(25);
   physicalState = signal<string>('Solid');
+  favorites = signal<Element[]>([]);
   elementInfo = computed(() => {
     const selectedElement = this.selectedElement();
     return selectedElement
@@ -57,5 +58,21 @@ export class ElementService {
 
   adjustTemperature(newTemperature: number): void {
     this.temperature.set(newTemperature);
+  }
+
+  getFavorites(): Element[] {
+    return this.favorites();
+  }
+
+  getSelectedElement(): Element | null {
+    return this.selectedElement();
+  }
+
+  addFavorite(element: Element): void {
+    this.favorites.update(fav => [...fav, element]);
+  }
+
+  removeFavorite(element: Element): void {
+    this.favorites.update(fav => fav.filter(e => e !== element));
   }
 }
