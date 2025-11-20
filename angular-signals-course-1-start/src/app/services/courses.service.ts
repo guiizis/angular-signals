@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {inject, Injectable} from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {firstValueFrom} from "rxjs";
@@ -10,6 +10,10 @@ import {GetCoursesResponse} from "../models/get-courses.response";
   providedIn: "root"
 })
 export class CoursesService {
+  private readonly httpClient = inject(HttpClient);
 
+  async loadAllCourses(): Promise<Course[]> {
+    return [];
+  }
 
 }

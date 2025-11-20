@@ -26,5 +26,4 @@ export class HomeComponent {
   private readonly courseService = inject(CoursesService);
   courses = signal<Course[]>([]);
 
-
 }
