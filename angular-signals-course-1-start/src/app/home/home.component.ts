@@ -8,6 +8,7 @@ import { MessagesService } from "../messages/messages.service";
 import { catchError, from, throwError } from "rxjs";
 import { toObservable, toSignal, outputToObservable, outputFromObservable } from "@angular/core/rxjs-interop";
 import { CoursesServiceWithFetch } from '../services/courses-fetch.service';
+import { JsonPipe } from '@angular/common';
 
 type Counter = {
   count: number
@@ -18,6 +19,7 @@ type Counter = {
   imports: [
     MatTabGroup,
     MatTab,
+    JsonPipe,
     CoursesCardListComponent
   ],
   templateUrl: './home.component.html',
@@ -26,6 +28,7 @@ type Counter = {
 export class HomeComponent implements OnInit{
   private readonly courseService = inject(CoursesService);
   private readonly courseServiceWithFetch = inject(CoursesServiceWithFetch);
+
   courses = signal<Course[]>([]);
 
   ngOnInit(): void {

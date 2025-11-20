@@ -13,7 +13,9 @@ export class CoursesService {
   private readonly httpClient = inject(HttpClient);
 
   async loadAllCourses(): Promise<Course[]> {
-    return [];
+    const courses$ = this.httpClient.get<GetCoursesResponse>(`${environment.apiRoot}/courses`);
+    const response = await firstValueFrom(courses$);
+    return response.courses;
   }
 
 }
