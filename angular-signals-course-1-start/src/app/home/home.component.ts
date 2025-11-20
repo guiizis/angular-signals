@@ -7,6 +7,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { MessagesService } from "../messages/messages.service";
 import { catchError, from, throwError } from "rxjs";
 import { toObservable, toSignal, outputToObservable, outputFromObservable } from "@angular/core/rxjs-interop";
+import { CoursesServiceWithFetch } from '../services/courses-fetch.service';
 
 type Counter = {
   count: number
@@ -22,8 +23,19 @@ type Counter = {
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   private readonly courseService = inject(CoursesService);
+  private readonly courseServiceWithFetch = inject(CoursesServiceWithFetch);
   courses = signal<Course[]>([]);
+
+  ngOnInit(): void {
+    this.loadCourses();
+  }
+
+  async loadCourses() {
+     this.courseServiceWithFetch.loadAllCourses()
+     .then(allCourses => this.courses.set(allCourses))
+     .catch(err => console.error("Error loading courses", err));
+  }
 
 }
