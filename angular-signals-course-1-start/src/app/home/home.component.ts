@@ -22,4 +22,9 @@ type Counter = {
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {}
+export class HomeComponent {
+  private readonly courseService = inject(CoursesService);
+  courses = signal<Course[]>([]);
+
+
+}

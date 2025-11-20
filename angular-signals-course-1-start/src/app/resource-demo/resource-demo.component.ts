@@ -6,6 +6,7 @@ import {Lesson} from "../models/lesson.model";
 
 @Component({
   selector: 'resource-demo',
+  standalone: true,
   templateUrl: './resource-demo.component.html',
   styleUrls: ['./resource-demo.component.scss'],
   imports: [MatProgressSpinner]
