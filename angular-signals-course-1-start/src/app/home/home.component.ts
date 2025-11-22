@@ -51,5 +51,4 @@ export class HomeComponent implements OnInit{
      .then(allCourses => this.#courses.set(allCourses))
      .catch(err => console.error("Error loading courses", err));
   }
-
 }
