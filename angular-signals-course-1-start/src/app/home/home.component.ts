@@ -29,7 +29,17 @@ export class HomeComponent implements OnInit{
   private readonly courseService = inject(CoursesService);
   private readonly courseServiceWithFetch = inject(CoursesServiceWithFetch);
 
-  courses = signal<Course[]>([]);
+  #courses = signal<Course[]>([]);
+
+  beginnerCourses = computed(() => {
+    const courses = this.#courses();
+    courses.filter(c => c.category === "BEGINNER")
+  });
+
+  advancedCourses = computed(() => {
+    const courses = this.#courses();
+    courses.filter(c => c.category === "ADVANCED")
+  });
 
   ngOnInit(): void {
     this.loadCourses();
@@ -37,7 +47,7 @@ export class HomeComponent implements OnInit{
 
   async loadCourses() {
      this.courseServiceWithFetch.loadAllCourses()
-     .then(allCourses => this.courses.set(allCourses))
+     .then(allCourses => this.#courses.set(allCourses))
      .catch(err => console.error("Error loading courses", err));
   }
 
