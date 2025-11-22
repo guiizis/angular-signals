@@ -27,18 +27,19 @@ type Counter = {
 })
 export class HomeComponent implements OnInit{
   private readonly courseService = inject(CoursesService);
-  private readonly courseServiceWithFetch = inject(CoursesServiceWithFetch);
 
   #courses = signal<Course[]>([]);
 
   beginnerCourses = computed(() => {
     const courses = this.#courses();
-    courses.filter(c => c.category === "BEGINNER")
+    const beginners = courses.filter(c => c.category === "BEGINNER");
+    return beginners;
   });
 
   advancedCourses = computed(() => {
     const courses = this.#courses();
-    courses.filter(c => c.category === "ADVANCED")
+    const advanced = courses.filter(c => c.category === "ADVANCED");
+    return advanced;
   });
 
   ngOnInit(): void {
@@ -46,7 +47,7 @@ export class HomeComponent implements OnInit{
   }
 
   async loadCourses() {
-     this.courseServiceWithFetch.loadAllCourses()
+     this.courseService.loadAllCourses()
      .then(allCourses => this.#courses.set(allCourses))
      .catch(err => console.error("Error loading courses", err));
   }
