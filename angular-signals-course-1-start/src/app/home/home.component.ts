@@ -33,13 +33,13 @@ export class HomeComponent implements OnInit{
   beginnerCourses = computed(() => {
     const courses = this.#courses();
     const beginners = courses.filter(c => c.category === "BEGINNER");
-    return beginners;
+    return beginners.sort(sortCoursesBySeqNo);
   });
 
   advancedCourses = computed(() => {
     const courses = this.#courses();
     const advanced = courses.filter(c => c.category === "ADVANCED");
-    return advanced;
+    return advanced.sort(sortCoursesBySeqNo);
   });
 
   ngOnInit(): void {
