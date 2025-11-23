@@ -43,10 +43,10 @@ export class HomeComponent implements OnInit{
   });
 
   ngOnInit(): void {
-    this.loadCourses();
+    this.loadAllCourses();
   }
 
-  async loadCourses() {
+  async loadAllCourses() {
      this.courseService.loadAllCourses()
      .then(allCourses => this.#courses.set(allCourses))
      .catch(err => console.error("Error loading courses", err));
