@@ -1,12 +1,12 @@
-import {Component, effect, inject, signal} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
-import {Course} from "../models/course.model";
-import {EditCourseDialogData} from "./edit-course-dialog.data.model";
-import {CoursesService} from "../services/courses.service";
-import {LoadingIndicatorComponent} from "../loading/loading.component";
-import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
-import {CourseCategoryComboboxComponent} from "../course-category-combobox/course-category-combobox.component";
-import {CourseCategory} from "../models/course-category.model";
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material/dialog";
+import { Course } from "../models/course.model";
+import { EditCourseDialogData } from "./edit-course-dialog.data.model";
+import { CoursesService } from "../services/courses.service";
+import { LoadingIndicatorComponent } from "../loading/loading.component";
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { CourseCategoryComboboxComponent } from "../course-category-combobox/course-category-combobox.component";
+import { CourseCategory } from "../models/course-category.model";
 import { firstValueFrom } from 'rxjs';
 
 @Component({
@@ -20,14 +20,33 @@ import { firstValueFrom } from 'rxjs';
   templateUrl: './edit-course-dialog.component.html',
   styleUrl: './edit-course-dialog.component.scss'
 })
-export class EditCourseDialogComponent {
+export class EditCourseDialogComponent implements OnInit {
   private readonly dialogRef = inject(MatDialogRef);
+  public readonly data: EditCourseDialogData = inject(MAT_DIALOG_DATA);
+  private readonly fb = inject(FormBuilder);
+
+  public readonly form = this.fb.group({
+    title: [this.data.course?.title || ''],
+    longDescription: [this.data.course?.longDescription || ''],
+    category: [this.data.course?.category || ''],
+    iconUrl: [this.data.course?.iconUrl || ''],
+  });
+
+  ngOnInit() {
+    this.form.patchValue({
+      title: this.data.course?.title,
+      longDescription: this.data.course?.longDescription,
+      category: this.data.course?.category,
+      iconUrl: this.data.course?.iconUrl,
+    });
+  }
+
 
   onCancel() {
     this.dialogRef.close();
   }
 
-  onSave() {}
+  onSave() { }
 
 }
 
