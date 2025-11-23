@@ -32,6 +32,8 @@ export class EditCourseDialogComponent implements OnInit {
     iconUrl: [this.data.course?.iconUrl || ''],
   });
 
+  private readonly coursesService = inject(CoursesService);
+
   ngOnInit() {
     this.form.patchValue({
       title: this.data.course?.title,
@@ -46,7 +48,22 @@ export class EditCourseDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  onSave() { }
+  async onSave() {
+    const courseProps = this.form.value as Partial<Course>;
+
+    if (this.data.mode === 'update') {
+      await this.saveCourse(this.data.course!.id, courseProps);
+    }
+  }
+
+  async saveCourse(courseId: string, changes: Partial<Course>) {
+    try {
+      await this.coursesService.saveCourse(courseId, changes);
+      this.dialogRef.close();
+    } catch (error) {
+      console.error('Something went wrong while saving the course changes', error);
+    }
+  }
 
 }
 
