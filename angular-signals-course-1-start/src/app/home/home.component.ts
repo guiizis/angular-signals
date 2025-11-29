@@ -52,9 +52,20 @@ export class HomeComponent implements OnInit{
      .catch(err => console.error("Error loading courses", err));
   }
 
-  OnCourseUpdate(course: Course) {
+  onCourseUpdate(course: Course) {
     const courses = this.#courses();
     const newCourses = courses.map(courseItem => courseItem.id === course.id ? course: courseItem);
     this.#courses.set(newCourses);
+  }
+
+  async onCourseDelete(courseId: string) {
+    try {
+      await this.courseService.deleteCourse(courseId);
+      const courses = this.#courses();
+      const newCourses = courses.filter(courseItem => courseItem.id !== courseId);
+      this.#courses.set(newCourses);
+    } catch (error) {
+      console.error("Error deleting course", error);
+    }
   }
 }

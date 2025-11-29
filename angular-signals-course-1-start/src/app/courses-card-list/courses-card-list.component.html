@@ -14,7 +14,7 @@
       <button class="btn" (click)="onEditCourse(course)">
         EDIT
       </button>
-      <img src="/assets/icons/delete.svg" alt="delete course" class="delete">
+      <img (click)="onDeleteCourse(course)" src="/assets/icons/delete.svg" alt="delete course" class="delete">
     </div>
   </div>
 }
