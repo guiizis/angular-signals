@@ -58,8 +58,8 @@ export class EditCourseDialogComponent implements OnInit {
 
   async saveCourse(courseId: string, changes: Partial<Course>) {
     try {
-      await this.coursesService.saveCourse(courseId, changes);
-      this.dialogRef.close();
+      const savedCourse = await this.coursesService.saveCourse(courseId, changes);
+      this.dialogRef.close(savedCourse);
     } catch (error) {
       console.error('Something went wrong while saving the course changes', error);
     }
@@ -76,6 +76,5 @@ export async function openEditCourseDialog(dialog: MatDialog, course: EditCourse
   config.data = course;
 
   const close$ = dialog.open(EditCourseDialogComponent, config).afterClosed();
-
   return firstValueFrom(close$);
 }

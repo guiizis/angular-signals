@@ -51,4 +51,10 @@ export class HomeComponent implements OnInit{
      .then(allCourses => this.#courses.set(allCourses))
      .catch(err => console.error("Error loading courses", err));
   }
+
+  OnCourseUpdate(course: Course) {
+    const courses = this.#courses();
+    const newCourses = courses.map(courseItem => courseItem.id === course.id ? course: courseItem);
+    this.#courses.set(newCourses);
+  }
 }
