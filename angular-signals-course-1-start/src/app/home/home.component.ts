@@ -9,6 +9,7 @@ import { catchError, from, throwError } from "rxjs";
 import { toObservable, toSignal, outputToObservable, outputFromObservable } from "@angular/core/rxjs-interop";
 import { CoursesServiceWithFetch } from '../services/courses-fetch.service';
 import { JsonPipe } from '@angular/common';
+import { openEditCourseDialog } from '../edit-course-dialog/edit-course-dialog.component';
 
 type Counter = {
   count: number
@@ -25,8 +26,9 @@ type Counter = {
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
   private readonly courseService = inject(CoursesService);
+  private readonly dialog = inject(MatDialog);
 
   #courses = signal<Course[]>([]);
 
@@ -47,14 +49,14 @@ export class HomeComponent implements OnInit{
   }
 
   async loadAllCourses() {
-     this.courseService.loadAllCourses()
-     .then(allCourses => this.#courses.set(allCourses))
-     .catch(err => console.error("Error loading courses", err));
+    this.courseService.loadAllCourses()
+      .then(allCourses => this.#courses.set(allCourses))
+      .catch(err => console.error("Error loading courses", err));
   }
 
   onCourseUpdate(course: Course) {
     const courses = this.#courses();
-    const newCourses = courses.map(courseItem => courseItem.id === course.id ? course: courseItem);
+    const newCourses = courses.map(courseItem => courseItem.id === course.id ? course : courseItem);
     this.#courses.set(newCourses);
   }
 
@@ -67,5 +69,16 @@ export class HomeComponent implements OnInit{
     } catch (error) {
       console.error("Error deleting course", error);
     }
+  }
+
+  async onAddCourse() {
+    const newCourse = await openEditCourseDialog(this.dialog, {
+      mode: 'create',
+      title: 'add a new course'
+    });
+    const courses = this.#courses();
+    const allCourses = [...courses, newCourse];
+
+    this.#courses.set(allCourses);
   }
 }
