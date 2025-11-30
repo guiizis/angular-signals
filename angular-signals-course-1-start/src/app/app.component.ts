@@ -13,7 +13,7 @@ import {MessagesComponent} from "./messages/messages.component";
     selector: 'app-root',
     imports: [
         RouterOutlet, MatSidenavContainer, MatSidenav, MatNavList, MatListItem, MatIcon, RouterLink, MatToolbar,
-        MatIconButton, LoadingIndicatorComponent, MessagesComponent
+        MatIconButton, LoadingIndicatorComponent, MessagesComponent, LoadingIndicatorComponent
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'

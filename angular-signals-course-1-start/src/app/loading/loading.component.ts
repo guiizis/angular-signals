@@ -10,6 +10,4 @@ import {LoadingService} from "./loading.service";
 })
 export class LoadingIndicatorComponent {
 
-
-
 }
