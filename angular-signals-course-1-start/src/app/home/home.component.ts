@@ -10,6 +10,7 @@ import { toObservable, toSignal, outputToObservable, outputFromObservable } from
 import { CoursesServiceWithFetch } from '../services/courses-fetch.service';
 import { JsonPipe } from '@angular/common';
 import { openEditCourseDialog } from '../edit-course-dialog/edit-course-dialog.component';
+import { LoadingService } from '../loading/loading.service';
 
 type Counter = {
   count: number
@@ -29,6 +30,7 @@ type Counter = {
 export class HomeComponent implements OnInit {
   private readonly courseService = inject(CoursesService);
   private readonly dialog = inject(MatDialog);
+  private readonly loadingService = inject(LoadingService);
 
   #courses = signal<Course[]>([]);
 
@@ -49,9 +51,12 @@ export class HomeComponent implements OnInit {
   }
 
   async loadAllCourses() {
+    this.loadingService.loadingOn();
+
     this.courseService.loadAllCourses()
       .then(allCourses => this.#courses.set(allCourses))
-      .catch(err => console.error("Error loading courses", err));
+      .catch(err => console.error("Error loading courses", err))
+      .finally(() => this.loadingService.loadingOf());
   }
 
   onCourseUpdate(course: Course) {
