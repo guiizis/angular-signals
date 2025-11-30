@@ -51,12 +51,9 @@ export class HomeComponent implements OnInit {
   }
 
   async loadAllCourses() {
-    this.loadingService.loadingOn();
-
     this.courseService.loadAllCourses()
       .then(allCourses => this.#courses.set(allCourses))
       .catch(err => console.error("Error loading courses", err))
-      .finally(() => this.loadingService.loadingOf());
   }
 
   onCourseUpdate(course: Course) {
