@@ -23,4 +23,7 @@ export class AppComponent {
   private readonly authService = inject(AuthService);
   public readonly isLoggedIn = this.authService.isLoggedIn
 
+  onLogout() {
+    this.authService.logout();
+  }
 }
