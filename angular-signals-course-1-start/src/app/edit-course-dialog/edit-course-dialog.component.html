@@ -17,7 +17,10 @@
 
   <div class="form-control">
     <label>Course category:</label>
-    <select formControlName="category">
+    <select
+      #category
+      formControlName="category"
+      >
       <option value="BEGINNER">Beginners</option>
       <option value="INTERMEDIATE">Intermediate</option>
       <option value="ADVANCED">Advanced</option>
