@@ -22,8 +22,10 @@ import { firstValueFrom } from 'rxjs';
 })
 export class EditCourseDialogComponent implements OnInit {
   private readonly dialogRef = inject(MatDialogRef);
-  public readonly data: EditCourseDialogData = inject(MAT_DIALOG_DATA);
+  private readonly coursesService = inject(CoursesService);
   private readonly fb = inject(FormBuilder);
+  public readonly data: EditCourseDialogData = inject(MAT_DIALOG_DATA);
+  public readonly category = signal<CourseCategory>(this.data.course?.category || 'BEGINNER');
 
   public readonly form = this.fb.group({
     title: [this.data.course?.title || ''],
@@ -32,7 +34,12 @@ export class EditCourseDialogComponent implements OnInit {
     iconUrl: [this.data.course?.iconUrl || ''],
   });
 
-  private readonly coursesService = inject(CoursesService);
+  constructor() {
+    effect(() => {
+      console.log('Category changed to', this.category());
+    });
+  }
+
 
   ngOnInit() {
     this.form.patchValue({
@@ -50,6 +57,7 @@ export class EditCourseDialogComponent implements OnInit {
 
   async onSave() {
     const courseProps = this.form.value as Partial<Course>;
+    courseProps.category = this.category();
 
     if (this.data.mode === 'update') {
       await this.saveCourse(this.data.course!.id, courseProps);
