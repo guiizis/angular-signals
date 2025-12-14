@@ -12,8 +12,12 @@ import {LessonDetailComponent} from "./lesson-detail/lesson-detail.component";
     styleUrl: './lessons.component.scss'
 })
 export class LessonsComponent {
+  private readonly lessonService = inject(LessonsService);
+  public readonly mode = signal<'master' | 'detail'>('master');
+  public readonly lessons = signal<Lesson[]>([]);
+  public readonly selectedLesson = signal<Lesson | null>(null);
 
+  onSearchLesson() {
 
-
-
+  }
 }
