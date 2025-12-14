@@ -21,8 +21,12 @@ export class CoursesCardListComponent {
 
   async onEditCourse(course: Course): Promise<void> {
     const newCourse = await openEditCourseDialog(this.dialog, { mode: 'update', title: course.title, course });
-    console.log('Edited course:', newCourse);
 
+    if (!newCourse) {
+      return;
+    }
+
+    console.log('Edited course:', newCourse);
     this.courseUpdate.emit(newCourse);
   }
 
