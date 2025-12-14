@@ -17,5 +17,6 @@ export class CourseComponent implements OnInit {
 
   ngOnInit(): void {
     this.course.set(this.activatedRoute.snapshot.data['course']);
+    this.lessons.set(this.activatedRoute.snapshot.data['lessons']);
   }
 }
