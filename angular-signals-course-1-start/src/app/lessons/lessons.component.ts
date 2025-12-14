@@ -13,11 +13,13 @@ import {LessonDetailComponent} from "./lesson-detail/lesson-detail.component";
 })
 export class LessonsComponent {
   private readonly lessonService = inject(LessonsService);
+  private readonly searchInputRef = viewChild.required<ElementRef>('search');
   public readonly mode = signal<'master' | 'detail'>('master');
   public readonly lessons = signal<Lesson[]>([]);
   public readonly selectedLesson = signal<Lesson | null>(null);
 
   onSearchLesson() {
+    const query = this.searchInputRef().nativeElement.value;
 
   }
 }

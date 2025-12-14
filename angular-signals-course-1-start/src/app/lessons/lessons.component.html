@@ -3,7 +3,7 @@
     <div class="header">
       <h1>Search Lessons</h1>
       <div class="form-control search-controls">
-        <input (keyup.enter)="onSearchLesson()" #lesson placeholder="search for a lesson" type="text">
+        <input #search (keyup.enter)="onSearchLesson()" placeholder="search for a lesson" type="text">
         <button (click)="onSearchLesson()" class="btn search">
           search
         </button>

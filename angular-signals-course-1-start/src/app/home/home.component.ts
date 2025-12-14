@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, Injector, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, inject, Injector, OnInit, signal, viewChild } from '@angular/core';
 import { CoursesService } from "../services/courses.service";
 import { Course, sortCoursesBySeqNo } from "../models/course.model";
 import { MatTab, MatTabGroup } from "@angular/material/tabs";
@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   private readonly courseService = inject(CoursesService);
   private readonly dialog = inject(MatDialog);
   private readonly messagesService = inject(MessagesService);
+  private readonly beginnerList = viewChild.required<CoursesCardListComponent>('beginnersList');
 
   #courses = signal<Course[]>([]);
 
