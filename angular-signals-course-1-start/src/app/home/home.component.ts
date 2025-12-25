@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   private readonly courseService = inject(CoursesService);
   private readonly dialog = inject(MatDialog);
   private readonly messagesService = inject(MessagesService);
+  private readonly injector = inject(Injector);
   private readonly beginnerList = viewChild.required<CoursesCardListComponent>('beginnersList');
 
   #courses = signal<Course[]>([]);
@@ -40,6 +41,10 @@ export class HomeComponent implements OnInit {
     const courses = this.#courses();
     const advanced = courses.filter(c => c.category === "ADVANCED");
     return advanced.sort(sortCoursesBySeqNo);
+  });
+
+  courses$ = toObservable(this.#courses, {
+    injector: this.injector
   });
 
   ngOnInit(): void {
